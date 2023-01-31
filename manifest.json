@@ -1,18 +1,18 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Pionex-Tool",
   "description": "Pionex tools",
   "version": "1.0",
-  "browser_action": {
+  "action": {
     "default_icon": "icon.png",
     "default_popup": "/dist/popup/index.html",
-    "default_title": "弹幕弹幕弹幕"
+    "default_title": "Pionex-Tool"
   },
+  "host_permissions": ["<all_urls>"],
   "permissions": [
     "contextMenus",
     "tabs",
     "cookies",
-    "<all_urls>",
     "notifications",
     "webRequest",
     "webRequestBlocking",
@@ -20,7 +20,7 @@
     "storage"
   ],
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
@@ -31,5 +31,11 @@
       "all_frames": true
     }
   ],
-  "web_accessible_resources": ["/dist/bundle.js"]
+  "web_accessible_resources": [
+    {
+      "resources": ["/dist/bundle.js"],
+      "matches": [],
+      "extension_ids": []
+    }
+  ]
 }

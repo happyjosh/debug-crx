@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cs from './index.module.less';
 
+const DEBUG_US_KEY = 'debug_us';
+
 const Popup: React.FC = () => {
-  const [logined, setLogined] = useState(false);
+  const [debugUS, setDebugUS] = useState(false);
+
+  useEffect(() => {
+    chrome.storage.local.get([DEBUG_US_KEY]).then((result) => {
+      setDebugUS(!!result[DEBUG_US_KEY]);
+    });
+  }, []);
 
   return (
-    <div
-      className={cs.container}
-      style={{
-        height: '420px'
-        // height: logined ? '218px' : '420px',
-      }}>
-      <div className={cs.helpContainer}>
-        <a className={cs.help} href={'https://www.baidu.com'} target={'_blank'}>
-          帮助
-        </a>
+    <div className={cs.container}>
+      <div className={cs.item}>
+        Pionex.US Debug
+        <input
+          type='checkbox'
+          checked={debugUS}
+          onChange={(e) => {
+            setDebugUS(e.target.checked);
+            chrome.storage.local.set({ [DEBUG_US_KEY]: true }).then(() => {});
+          }}
+        />
       </div>
     </div>
   );
