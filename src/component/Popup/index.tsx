@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import cs from './index.module.less';
-
-const DEBUG_US_KEY = 'debug_us';
+import { changeDebugUS, isDebugUS } from '../../common/utils';
 
 const Popup: React.FC = () => {
   const [debugUS, setDebugUS] = useState(false);
 
   useEffect(() => {
-    chrome.storage.local.get([DEBUG_US_KEY]).then((result) => {
-      setDebugUS(!!result[DEBUG_US_KEY]);
-    });
+    isDebugUS().then((res) => setDebugUS(res));
   }, []);
 
   return (
@@ -21,7 +18,7 @@ const Popup: React.FC = () => {
           checked={debugUS}
           onChange={(e) => {
             setDebugUS(e.target.checked);
-            chrome.storage.local.set({ [DEBUG_US_KEY]: true }).then(() => {});
+            changeDebugUS(e.target.checked);
           }}
         />
       </div>

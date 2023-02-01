@@ -5,7 +5,7 @@
   "version": "1.0",
   "action": {
     "default_icon": "icon.png",
-    "default_popup": "/dist/popup/index.html",
+    "default_popup": "/dist/popup.html",
     "default_title": "Pionex-Tool"
   },
   "host_permissions": ["<all_urls>"],
@@ -20,12 +20,12 @@
     "storage"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "/dist/background.js"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["/dist/bundle.js"],
+      "js": ["/dist/crx.js"],
       "css": ["custom.css"],
       "run_at": "document_end",
       "all_frames": true
@@ -33,7 +33,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["/dist/bundle.js"],
+      "resources": ["/dist/crx.js"],
       "matches": [],
       "extension_ids": []
     }

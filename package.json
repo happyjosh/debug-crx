@@ -10,7 +10,7 @@
     "start:popup": "webpack-dev-server --open --config popup_webpack.dev.config.js",
     "build": "webpack --config webpack.prod.config.js",
     "build:popup": "webpack --config popup_webpack.prod.config.js",
-    "build:all": "yarn build && yarn build:popup",
+    "build:all": "webpack --config all_webpack.prod.config.js",
     "watch": "webpack --watch"
   },
   "keywords": [
